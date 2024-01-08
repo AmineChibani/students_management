@@ -1,0 +1,93 @@
+﻿@model Student_Management.ModelView.ModifierAbonnementViewModel
+@{
+    Layout = "_Mylayout";
+}
+
+@section Title {
+    <title>Modifier une abonnement</title>
+}
+@Html.AntiForgeryToken()
+@section Styles {
+    <style>
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+
+            .checkbox-item input {
+                margin-right: 5px;
+            }
+    </style>
+}
+
+<h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+    Modifier  abonnement
+</h2>
+<hr />
+<br />
+
+<form asp-controller="Abonnements" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+        <label class="block text-sm">
+            <label asp-for="TypeAbonnement" class="text-gray-700 dark:text-gray-400"></label>
+            <input asp-for="TypeAbonnement" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <span asp-validation-for="TypeAbonnement" class="text-xs text-red-600 dark:text-red-400"></span>
+        </label><br />
+        <label class="block text-sm">
+            <label asp-for="Solde" class="text-gray-700 dark:text-gray-400"></label>
+            <input asp-for="Solde" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <span asp-validation-for="Solde" class="text-xs text-red-600 dark:text-red-400"></span>
+        </label><br />
+        <label asp-for="SelectedStudentId" class="text-gray-700 dark:text-gray-400"></label>
+        <select asp-for="SelectedStudentId" asp-items="@ViewBag.StudentId" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <option value="">Select StudentId</option>
+        </select>
+        <span asp-validation-for="SelectedStudentId" class="text-xs text-red-600 dark:text-red-400"></span><br />
+        <label class="block text-sm">
+            <label for="SelectedLineIds" class="text-gray-700 dark:text-gray-400">Lines</label><br />
+            <div class="checkbox-grid">
+            @if (Model.Lines != null)
+            {
+                foreach (var line in Model.Lines)
+                {
+                    <div class="checkbox-item">
+                    <input name="SelectedLineIds" type="checkbox" value="@line.LigneId" class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" checked="@line.IsChecked" />
+                    <input type="hidden" name="SelectedLineNums" value="@line.NumLine" />
+                    <span class="text-gray-700 dark:text-gray-400">
+                        @line.NumLine
+                    </span>
+                    </div>
+                }
+            }
+            </div>
+        </label><br />
+        <input type="submit" value="Valider" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" />
+    </div>
+</form>
+@section Scripts {
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            (async function () {
+                var selectedLines = @Html.Raw(Json.Serialize(Model.Lines));
+
+                selectedLines.forEach(function (line) {
+                    var checkbox = document.querySelector('input[value="' + line.LigneId + '"]');
+                    if (checkbox) {
+                        checkbox.checked = line.IsChecked;
+                    }
+                });
+            })();
+        });
+    </script>
+
+}

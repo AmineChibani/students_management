@@ -1,0 +1,65 @@
+﻿@model Student_Management.Models.Campaign
+@{
+    Layout = "_Mylayout";
+}
+
+@section Title {
+    <title>Ajouter Campaign</title>
+}
+@Html.AntiForgeryToken()
+
+
+<h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+    Ajouter Campaign
+</h2>
+<hr />
+<br />
+
+<form asp-action="AddorEdit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+    <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+        <label class="block text-sm">
+            <label asp-for="DateDebut" class="text-gray-700 dark:text-gray-400"></label>
+            <input asp-for="DateDebut" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <span asp-validation-for="DateDebut" class="text-xs text-red-600 dark:text-red-400"></span>
+        </label><br />
+        <label class="block text-sm">
+            <label asp-for="DateFin" class="text-gray-700 dark:text-gray-400"></label>
+            <input asp-for="DateFin" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <span asp-validation-for="DateFin" class="text-xs text-red-600 dark:text-red-400"></span>
+        </label><br />
+        <label class="block text-sm">
+            <label asp-for="Budget" class="text-gray-700 dark:text-gray-400"></label>
+            <input asp-for="Budget" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <span asp-validation-for="Budget" class="text-xs text-red-600 dark:text-red-400"></span>
+        </label><br />
+        <label class="block text-sm">
+            <label asp-for="ContentUrl" class="text-gray-700 dark:text-gray-400"></label>
+            <input asp-for="ContentUrl" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <span asp-validation-for="ContentUrl" class="text-xs text-red-600 dark:text-red-400"></span>
+        </label><br />
+        <label class="block text-sm">
+            <label asp-for="AdUrl" class="text-gray-700 dark:text-gray-400"></label>
+            <input asp-for="AdUrl" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <span asp-validation-for="AdUrl" class="text-xs text-red-600 dark:text-red-400"></span>
+        </label><br />
+
+        
+        
+        
+       
+        <label asp-for="IdLocation" class="text-gray-700 dark:text-gray-400"></label>
+        <select asp-for="IdLocation" asp-items="@ViewBag.IdLocation" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <option value="">Select location</option>
+        </select>
+        <span asp-validation-for="IdLocation" class="text-xs text-red-600 dark:text-red-400"></span><br />
+
+        <input type="submit" value="Valider" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" />
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
