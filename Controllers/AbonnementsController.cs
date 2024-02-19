@@ -215,32 +215,32 @@ namespace Student_Management.Controllers
 
         // edit post data
         [HttpPost]
-        public IActionResult Edit(ModifierAbonnementViewModel editViewModel)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(ModifierAbonnementViewModel editViewModel)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // Retrieve the existing Abonnement from the database
-                    Abonnement existingAbonnement = _context.Abonnements.Find(editViewModel.Id);
+                    var existingAbonnement = await _context.Abonnements
+                        .Include(a => a.AbonnementLignes)
+                        .FirstOrDefaultAsync(a => a.IdAbonnement == editViewModel.IdAbonnement);
 
                     if (existingAbonnement == null)
                     {
-                        return NotFound(); // Or handle as needed
+                        return NotFound();
                     }
 
-                    // Update properties of existingAbonnement with data from editViewModel
                     existingAbonnement.TypeAbonnement = editViewModel.TypeAbonnement;
                     existingAbonnement.Solde = editViewModel.Solde;
                     existingAbonnement.StudentId = editViewModel.SelectedStudentId;
 
-                    // Update AbonnementLignes based on editViewModel.Lines
-                    UpdateAbonnementLignes(existingAbonnement, editViewModel.Lines);
+                    UpdateAbonnementLignes(existingAbonnement, editViewModel.SelectedLineIds);
 
-                    // Save changes to the database
-                    _context.SaveChanges();
+                    _context.Update(existingAbonnement);
+                    await _context.SaveChangesAsync();
 
-                    return RedirectToAction("Index"); 
+                    return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
@@ -249,31 +249,27 @@ namespace Student_Management.Controllers
                 }
             }
 
-            ViewData["StudentId"] = new SelectList(_context.Students, "IdStudent", "Nom");
+            ViewData["StudentId"] = new SelectList(_context.Students, "IdStudent", "Nom", editViewModel.SelectedStudentId);
             return View(editViewModel);
         }
 
-        private void UpdateAbonnementLignes(Abonnement abonnement, List<LineViewModel> lineViewModels)
+        private void UpdateAbonnementLignes(Abonnement abonnement, List<int> selectedLineIds)
         {
-            // Remove existing AbonnementLignes
-            _context.AbonnementLignes.RemoveRange(_context.AbonnementLignes.Where(al => al.AbonnementId == abonnement.IdAbonnement));
+            abonnement.AbonnementLignes.Clear();
 
-            // Add AbonnementLignes based on LineViewModels
-            foreach (var lineViewModel in lineViewModels)
+            if (selectedLineIds != null)
             {
-                if (lineViewModel.IsChecked)
+                foreach (var ligneId in selectedLineIds)
                 {
-                    AbonnementLigne abonnementLigne = new AbonnementLigne
+                    abonnement.AbonnementLignes.Add(new AbonnementLigne
                     {
-                        AbonnementId = abonnement.IdAbonnement,
-                        LigneId = lineViewModel.LigneId,
-                        // Set other properties as needed
-                    };
-
-                    _context.AbonnementLignes.Add(abonnementLigne);
+                        LigneId = ligneId
+                    });
                 }
             }
         }
+
+
 
 
         // POST: Students/Delete/5

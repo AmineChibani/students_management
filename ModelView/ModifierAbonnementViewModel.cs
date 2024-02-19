@@ -4,7 +4,7 @@ namespace Student_Management.ModelView
 {
     public class ModifierAbonnementViewModel
     {
-        public int Id { get; set; }
+        public int IdAbonnement { get; set; }
         public string TypeAbonnement { get; set; }
         public DateTime DateDeCreation { get; set; }
         public double Solde { get; set; }

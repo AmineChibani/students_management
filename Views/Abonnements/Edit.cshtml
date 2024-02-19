@@ -33,7 +33,7 @@
 <br />
 
 <form asp-controller="Abonnements" asp-action="Edit" method="post">
-    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="IdAbonnement" />
 
     <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
         <label class="block text-sm">
@@ -78,14 +78,18 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             (async function () {
-                var selectedLines = @Html.Raw(Json.Serialize(Model.Lines));
+                // Vérifier si Model.Lines est null ou non
+                var selectedLines = @Html.Raw(Model.Lines != null ? Json.Serialize(Model.Lines) : "null");
 
-                selectedLines.forEach(function (line) {
-                    var checkbox = document.querySelector('input[value="' + line.LigneId + '"]');
-                    if (checkbox) {
-                        checkbox.checked = line.IsChecked;
-                    }
-                });
+                // Vérifier si selectedLines est null ou non
+                if (selectedLines) {
+                    selectedLines.forEach(function (line) {
+                        var checkbox = document.querySelector('input[value="' + line.LigneId + '"]');
+                        if (checkbox) {
+                            checkbox.checked = line.IsChecked;
+                        }
+                    });
+                }
             })();
         });
     </script>

@@ -1,21 +1,20 @@
-﻿@model Student_Management.Models.Student
+﻿@model Student_Management.ModelView.AjouterEtudiant
 @{
     Layout = "_Mylayout";
 }
-
-@section Title {
-    <title>Ajouter Etudiant</title>
+@{
+    ViewData["Title"] = "Modifier un étudiant";
 }
 @Html.AntiForgeryToken()
 
 
 <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-    Ajouter Etudiant
+    Modifier un Etudiant
 </h2>
 <hr />
 <br />
 
-<form asp-action="AddorEdit" method="post" enctype="multipart/form-data">
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="IdStudent" />
     <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
         <label class="block text-sm">
@@ -60,12 +59,12 @@
         </label><br />
         <label class="block text-sm">
             <label asp-for="Etat" class="text-gray-700 dark:text-gray-400"></label>
-            <input asp-for="Etat" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <input asp-for="Etat" type="text" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
             <span asp-validation-for="Etat" class="text-xs text-red-600 dark:text-red-400"></span>
         </label>
         <label asp-for="Cartier" class="text-gray-700 dark:text-gray-400"></label>
         <select asp-for="Cartier" asp-items="@ViewBag.Cartier" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
-            <option value="">Select Cartier</option>
+            <option value="">Selectionner un  Cartier</option>
         </select>
         <span asp-validation-for="Cartier" class="text-xs text-red-600 dark:text-red-400"></span><br />
 

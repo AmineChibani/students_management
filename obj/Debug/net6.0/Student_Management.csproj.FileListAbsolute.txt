@@ -290,3 +290,4 @@ C:\Users\chiba\OneDrive\Documents\Asp_Project\Student_Management\Student_Managem
 C:\Users\chiba\OneDrive\Documents\Asp_Project\Student_Management\Student_Management\obj\Debug\net6.0\Student_Management.pdb
 C:\Users\chiba\OneDrive\Documents\Asp_Project\Student_Management\Student_Management\obj\Debug\net6.0\Student_Management.genruntimeconfig.cache
 C:\Users\chiba\OneDrive\Documents\Asp_Project\Student_Management\Student_Management\obj\Debug\net6.0\ref\Student_Management.dll
+C:\Users\chiba\OneDrive\Documents\Asp_Project\Student_Management\Student_Management\obj\Debug\net6.0\Student_Management.sourcelink.json

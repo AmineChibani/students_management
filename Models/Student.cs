@@ -26,7 +26,6 @@ public partial class Student
     public bool Etat { get; set; }
 
     public int Cartier { get; set; }
-
     public virtual ICollection<Abonnement> Abonnements { get; } = new List<Abonnement>();
 
     public virtual Cartier CartierNavigation { get; set; } = null!;

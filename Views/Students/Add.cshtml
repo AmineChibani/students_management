@@ -1,0 +1,79 @@
+﻿@model Student_Management.ModelView.AjouterEtudiant
+@{
+    Layout = "_Mylayout";
+}
+@section Title {
+    <title>Ajouter Etudiant</title>
+}
+@Html.AntiForgeryToken()
+
+
+<h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+    Ajouter un Etudiant
+</h2>
+<hr />
+<br />
+
+<form asp-action="Add" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="IdStudent" />
+    <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+        <label class="block text-sm">
+            <label asp-for="Nom" class="text-gray-700 dark:text-gray-400"></label>
+            <input asp-for="Nom" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <span asp-validation-for="Nom" class="text-xs text-red-600 dark:text-red-400"></span>
+        </label><br />
+        <label class="block text-sm">
+            <label asp-for="Prenom" class="text-gray-700 dark:text-gray-400"></label>
+            <input asp-for="Prenom" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <span asp-validation-for="Prenom" class="text-xs text-red-600 dark:text-red-400"></span>
+        </label><br />
+        <label class="block text-sm">
+            <label asp-for="Cen" class="text-gray-700 dark:text-gray-400"></label>
+            <input asp-for="Cen" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <span asp-validation-for="Cen" class="text-xs text-red-600 dark:text-red-400"></span>
+        </label><br />
+        <label class="block text-sm">
+            <label asp-for="Cin" class="text-gray-700 dark:text-gray-400"></label>
+            <input asp-for="Cin" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <span asp-validation-for="Cin" class="text-xs text-red-600 dark:text-red-400"></span>
+        </label><br />
+        <label class="block text-sm">
+            <label asp-for="Tel" class="text-gray-700 dark:text-gray-400"></label>
+            <input asp-for="Tel" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <span asp-validation-for="Tel" class="text-xs text-red-600 dark:text-red-400"></span>
+        </label><br />
+        <label class="block text-sm">
+            <label asp-for="Adresse" class="text-gray-700 dark:text-gray-400"></label>
+            <input asp-for="Adresse" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <span asp-validation-for="Adresse" class="text-xs text-red-600 dark:text-red-400"></span>
+        </label><br />
+        <label class="block text-sm">
+            <label asp-for="Email" class="text-gray-700 dark:text-gray-400"></label>
+            <input asp-for="Email" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <span asp-validation-for="Email" class="text-xs text-red-600 dark:text-red-400"></span>
+        </label><br />
+        <label class="block text-sm">
+            <label asp-for="Password" class="text-gray-700 dark:text-gray-400"></label>
+            <input asp-for="Password" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <span asp-validation-for="Password" class="text-xs text-red-600 dark:text-red-400"></span>
+        </label><br />
+        <label class="block text-sm">
+            <label asp-for="Etat" class="text-gray-700 dark:text-gray-400"></label>
+            <input asp-for="Etat" type="text" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <span asp-validation-for="Etat" class="text-xs text-red-600 dark:text-red-400"></span>
+        </label>
+        <label asp-for="Cartier" class="text-gray-700 dark:text-gray-400"></label>
+        <select asp-for="Cartier" asp-items="@ViewBag.Cartier" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+            <option value="">Selectionner un  Cartier</option>
+        </select>
+        <span asp-validation-for="Cartier" class="text-xs text-red-600 dark:text-red-400"></span><br />
+
+        <input type="submit" value="Valider" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" />
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
